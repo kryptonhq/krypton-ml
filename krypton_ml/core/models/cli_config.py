@@ -9,6 +9,7 @@ class ModelOptions(BaseModel):
 class Model(BaseModel):
     name: str
     type: str
+    module_path: str
     callable: str
     endpoint: str
     options: Optional[ModelOptions] = None
