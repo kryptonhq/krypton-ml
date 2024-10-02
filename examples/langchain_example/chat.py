@@ -1,14 +1,22 @@
 from langchain_ollama import ChatOllama
+from langchain_core.prompts import ChatPromptTemplate
 
+# Initialize the Ollama LLM
 llm = ChatOllama(
-    model="llama3.1",
+    model="llama3.2:1b",
     temperature=0
 )
 
-messages = [
-    (
-        "system",
-        "You are a helpful assistant that translates English to French. Translate the user sentence.",
-    ),
-    ("human", "I love programming."),
-]
+# Create a prompt template
+prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are a helpful assistant that translates {input_language} to {output_language}.",
+        ),
+        ("human", "{input}"),
+    ]
+)
+
+# Create an LLMChain
+chain = prompt | llm

@@ -1,0 +1,29 @@
+krypton:
+  server:
+    port: 5000
+    allow_origins: ["*"]
+    allow_credentials: true
+    allow_methods: ["GET", "POST", "OPTIONS"]
+    allow_headers: ["*"]
+    debug: true
+  models:
+    - name: langchain-llama3.2-completion-example
+      type: langchain
+      description: llama3.2 completion example using langchain
+      module_path: ./examples
+      callable: langchain_example.completion.chain
+      endpoint: langchain/llama3.2/completion
+      tags:
+        - langchain
+        - example
+        - completion
+    - name: langchain-llama3.2-chat-example
+      type: langchain
+      description: llama3.2 chat example using langchain
+      module_path: ./examples
+      callable: langchain_example.chat.chain
+      endpoint: langchain/llama3.2/chat
+      tags:
+        - langchain
+        - example
+        - chat
