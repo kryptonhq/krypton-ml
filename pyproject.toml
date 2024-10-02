@@ -1,9 +1,16 @@
 [tool.poetry]
 name = "krypton-ml"
-version = "0.1.0"
-description = ""
-authors = ["Varun"]
+version = "0.1.3"
+description = "A ML model serving library"
+authors = ["Varun Kruthiventi"]
 readme = "README.md"
+repository = "https://github.com/kryptonhq/krypton-ml"
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
@@ -11,11 +18,6 @@ fastapi = {extras = ["standard"], version = "^0.115.0"}
 typer = "^0.12.5"
 pydantic = "^2.9.2"
 pydantic-yaml = "^1.3.0"
-
-
-[tool.poetry.group.external_modules.dependencies]
-langchain = "^0.3.1"
-langchain-ollama = "^0.2.0"
 
 [build-system]
 requires = ["poetry-core"]
