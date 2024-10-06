@@ -2,10 +2,7 @@ from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 
 # Initialize the Ollama LLM
-llm = ChatOllama(
-    model="llama3.2:1b",
-    temperature=0
-)
+llm = ChatOllama(model="llama3.2:1b", temperature=0)
 
 # Create a prompt template
 prompt = ChatPromptTemplate.from_messages(

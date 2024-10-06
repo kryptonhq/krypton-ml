@@ -1,7 +1,8 @@
 import importlib.util
-import sys
 import os
+import sys
 from typing import Callable
+
 
 def load_module(module_path: str, callable_path: str) -> Callable:
     """
@@ -13,10 +14,10 @@ def load_module(module_path: str, callable_path: str) -> Callable:
     """
 
     # Split the callable path into package, module, and callable parts
-    parts = callable_path.split('.')
+    parts = callable_path.split(".")
     package_name = parts[0]
     module_name = parts[1]
-    callable_name = '.'.join(parts[2:])
+    callable_name = ".".join(parts[2:])
 
     # Construct the full path to the package
     package_path = os.path.join(module_path, package_name)
@@ -36,9 +37,13 @@ def load_module(module_path: str, callable_path: str) -> Callable:
         return obj
 
     except ImportError:
-        raise ImportError(f"Could not import module {package_name}.{module_name} from {package_path}")
+        raise ImportError(
+            f"Could not import module {package_name}.{module_name} from {package_path}"
+        )
     except AttributeError:
-        raise AttributeError(f"Could not find callable '{callable_name}' in module {package_name}.{module_name}")
+        raise AttributeError(
+            f"Could not find callable '{callable_name}' in module {package_name}.{module_name}"
+        )
     finally:
         # Remove the temporarily added path
         sys.path.pop(0)

@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class ModelOptions(BaseModel):
     debug: bool = False
 
+
 class Model(BaseModel):
     name: str
     type: str
@@ -16,6 +17,7 @@ class Model(BaseModel):
     tags: List[str] = []
     description: str = ""
 
+
 class ServerConfig(BaseModel):
     host: str = "0.0.0.0"
     port: int = 8000
@@ -25,9 +27,11 @@ class ServerConfig(BaseModel):
     allow_headers: List[str] = []
     debug: bool = False
 
+
 class KryptonConfig(BaseModel):
     models: List[Model]
     server: Optional[ServerConfig]
+
 
 class RootConfig(BaseModel):
     krypton: KryptonConfig
