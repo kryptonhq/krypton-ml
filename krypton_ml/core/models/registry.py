@@ -16,3 +16,4 @@ class RegisteredModel(BaseModel):
     name: str
     description: str
     tags: List[str]
+    endpoint: str

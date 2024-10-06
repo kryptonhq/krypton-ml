@@ -31,6 +31,7 @@ class ModelRegistry:
             name=model.name,
             description=model.description,
             tags=model.tags,
+            endpoint=model_key,
         )
 
     def invoke_model(self, model_key: str, input: Dict[str, Any]) -> Dict[str, Any]:
@@ -53,3 +54,18 @@ class ModelRegistry:
             return model.predict(input)
         else:
             raise ValueError(f"Unsupported model type: {model_type}")
+
+    def get_registered_models(self):
+        """
+        Get the list of registered models
+        :return: List[Dict[str, Any]] List of registered models
+        """
+        return [
+            {
+                "name": model_info.name,
+                "description": model_info.description,
+                "endpoint": model_info.endpoint,
+                "tags": model_info.tags,
+            }
+            for model_info in self.model_registry.values()
+        ]

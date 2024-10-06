@@ -32,4 +32,8 @@ def load_model_endpoints(app: FastAPI, models: [Model]):
             json_string = dumps(response, ensure_ascii=False)
             return JSONResponse(content={"response": json.loads(json_string)})
 
+        @app.get("/registry/models", description="Get the list of registered models")
+        async def get_registered_models():
+            return model_registry.get_registered_models()
+
     return app
