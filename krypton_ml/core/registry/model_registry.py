@@ -1,8 +1,8 @@
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 from krypton_ml.core.loader.module import load_module
 from krypton_ml.core.models.cli_config import Model
-from krypton_ml.core.models.registry import RegisteredModel
+from krypton_ml.core.models.registry import RegisteredModel, ModelInfoResponse
 
 
 class ModelRegistry:
@@ -55,17 +55,17 @@ class ModelRegistry:
         else:
             raise ValueError(f"Unsupported model type: {model_type}")
 
-    def get_registered_models(self):
+    def get_registered_models(self) -> List[ModelInfoResponse]:
         """
         Get the list of registered models
-        :return: List[Dict[str, Any]] List of registered models
+        :return: List[ModelInfoResponse] List of registered models
         """
         return [
-            {
-                "name": model_info.name,
-                "description": model_info.description,
-                "endpoint": model_info.endpoint,
-                "tags": model_info.tags,
-            }
+            ModelInfoResponse(
+                name=model_info.name,
+                description=model_info.description,
+                endpoint=model_info.endpoint,
+                tags=model_info.tags,
+            )
             for model_info in self.model_registry.values()
         ]

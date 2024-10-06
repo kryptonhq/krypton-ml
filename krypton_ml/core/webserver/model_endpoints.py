@@ -1,10 +1,12 @@
 import json
+from typing import List
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from langchain.load.dump import dumps
 
 from krypton_ml.core.models.cli_config import Model
+from krypton_ml.core.models.registry import ModelInfoResponse
 from krypton_ml.core.registry.model_registry import ModelRegistry
 
 model_registry = ModelRegistry()
@@ -32,7 +34,11 @@ def load_model_endpoints(app: FastAPI, models: [Model]):
             json_string = dumps(response, ensure_ascii=False)
             return JSONResponse(content={"response": json.loads(json_string)})
 
-        @app.get("/registry/models", description="Get the list of registered models")
+        @app.get(
+            "/registry/models",
+            description="Get the list of registered models",
+            response_model=List[ModelInfoResponse],
+        )
         async def get_registered_models():
             return model_registry.get_registered_models()
 

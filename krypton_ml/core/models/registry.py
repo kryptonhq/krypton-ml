@@ -17,3 +17,10 @@ class RegisteredModel(BaseModel):
     description: str
     tags: List[str]
     endpoint: str
+
+
+class ModelInfoResponse(BaseModel):
+    name: str
+    description: str
+    endpoint: str
+    tags: List[str]
