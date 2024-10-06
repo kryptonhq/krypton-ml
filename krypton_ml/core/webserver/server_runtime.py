@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from krypton_ml.core.models.cli_config import ServerConfig
-from krypton_ml.core.utils.logger import logger
 from krypton_ml.core.webserver.log_middleware import LogMiddleware
 
 
