@@ -73,7 +73,7 @@ const config = {
         title: 'Krypton ML',
         logo: {
           alt: 'Krypton ML',
-          src: 'img/logo.svg',
+          src: 'img/icon-192.png',
         },
         items: [
           {
@@ -116,7 +116,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Krypton ML. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Krypton ML.`,
       },
       prism: {
         theme: prismThemes.github,
