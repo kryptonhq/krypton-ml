@@ -4,7 +4,6 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from langchain.load.dump import dumps
 
-from krypton_ml.core.loader.module import load_module
 from krypton_ml.core.models.cli_config import Model
 from krypton_ml.core.registry.model_registry import ModelRegistry
 
