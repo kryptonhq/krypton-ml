@@ -6,15 +6,17 @@ from langchain.load.dump import dumps
 
 from krypton_ml.core.loader.module import load_module
 from krypton_ml.core.models.cli_config import Model
+from krypton_ml.core.registry.model_registry import ModelRegistry
 
-model_registry = {}
+model_registry = ModelRegistry()
 
 
 def load_model_endpoints(app: FastAPI, models: [Model]):
     for idx, model in enumerate(models):
-        lc_callable = load_module(model.module_path, model.callable)
+        # Prepare the model key
         model_key = f"/{model.endpoint}"
-        model_registry[model_key] = lc_callable
+        # Load the model into the model registry
+        model_registry.load_model(model, model_key)
 
         @app.post(
             f"/{model.endpoint}",
@@ -23,8 +25,11 @@ def load_model_endpoints(app: FastAPI, models: [Model]):
             tags=model.tags,
         )
         async def invoke_model(request: Request, input: dict):
+            # Get the model identifier from the request URL
             model_identifier = request.url.path
-            response = model_registry[model_identifier].invoke(input)
+            # Invoke the model
+            response = model_registry.invoke_model(model_identifier, input)
+
             json_string = dumps(response, ensure_ascii=False)
             return JSONResponse(content={"response": json.loads(json_string)})
 
