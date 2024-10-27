@@ -73,7 +73,7 @@ const config = {
         title: 'Krypton ML',
         logo: {
           alt: 'Krypton ML',
-          src: 'img/icon-192.png',
+          src: 'img/apple-icon-180x180.png',
         },
         items: [
           {
