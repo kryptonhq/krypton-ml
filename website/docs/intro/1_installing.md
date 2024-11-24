@@ -72,6 +72,8 @@ krypton krypton_config.yaml
 
 The server should start, and you'll see output indicating that it's running and which endpoints are available.
 
+![Krypton ML Server Running](/img/docs/krypton_docs_1.png)
+
 ## Testing Your Deployment
 
 You can test your deployment using curl or any API client. Here's an example using curl:
