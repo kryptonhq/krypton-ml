@@ -59,6 +59,30 @@ Check out the `examples` folder in the repository for LangChain and Ollama based
 
 These examples demonstrate how to deploy LangChain models as API endpoints using Krypton ML's config-driven approach.
 
+## Running Examples with Docker
+
+```bash
+cd examples
+docker compose up -d
+```
+
+Pull the llama3.2:1b model in Ollama container
+```bash
+container_id=$(sudo docker ps | grep ollama | awk '{print $1}')
+docker exec -it $container_id ollama pull llama3.2:1b
+```
+
+Test the example langchain endpoint which completes the text
+```bash
+curl -X 'POST' \
+  'http://0.0.0.0:5000/langchain/llama3.2/completion' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{"topic": "Iron man"}'
+```
+
+You should see the text completion as a response.
+
 ## Contributing
 
 We welcome contributions to Krypton ML! Please feel free to submit issues, fork the repository and send pull requests.
