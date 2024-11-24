@@ -1,4 +1,4 @@
-# Quick Start Guide
+# 1. Quick Start Guide
 
 This guide will walk you through the process of setting up and running your first Krypton ML server with a LangChain completion example.
 

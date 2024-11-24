@@ -32,16 +32,16 @@ krypton:
 
 ### Model Configuration
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| name | String | Name of the model |
-| type | String | Type of the model (e.g., "langchain") |
-| module_path | String | Python path to the module containing the model |
+| Parameter | Type | Description                                             |
+|-----------|------|---------------------------------------------------------|
+| name | String | Name of the model                                       |
+| type | String | Type of the model (e.g., "langchain", "custom")                 |
+| module_path | String | Python path to the module containing the model          |
 | callable | String | Name of the function or class to call within the module |
-| endpoint | String | API endpoint for the model |
-| options | ModelOptions | (Optional) Additional options for the model |
-| tags | List[String] | (Optional) Tags associated with the model |
-| description | String | (Optional) Description of the model |
+| endpoint | String | API endpoint for the model                              |
+| options | ModelOptions | (Optional) Additional options for the model             |
+| tags | List[String] | (Optional) Tags associated with the model               |
+| description | String | (Optional) Description of the model                     |
 
 ### ModelOptions
 
