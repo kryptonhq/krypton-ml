@@ -10,7 +10,7 @@ krypton:
     - name: langchain-llama3.2-completion-example
       type: langchain
       description: llama3.2 completion example using langchain
-      module_path: ./examples
+      module_path: .
       callable: langchain_example.completion.chain
       endpoint: langchain/llama3.2/completion
       tags:
@@ -20,7 +20,7 @@ krypton:
     - name: langchain-llama3.2-chat-example
       type: langchain
       description: llama3.2 chat example using langchain
-      module_path: ./examples
+      module_path: .
       callable: langchain_example.chat.chain
       endpoint: langchain/llama3.2/chat
       tags:
@@ -30,7 +30,7 @@ krypton:
     - name: custom-model-example
       type: custom
       description: Custom model example
-      module_path: ./examples
+      module_path: .
       callable: custom.custom_model.CustomModelExample
       endpoint: custom/model/example
       tags:
