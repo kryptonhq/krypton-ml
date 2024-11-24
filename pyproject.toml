@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "krypton-ml"
-version = "0.1.6"
+version = "0.1.7"
 description = "A ML model serving library"
 authors = ["Varun Kruthiventi"]
 readme = "README.md"

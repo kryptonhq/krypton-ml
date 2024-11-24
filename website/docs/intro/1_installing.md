@@ -1,4 +1,4 @@
-# Quick Start Guide
+# 1. Quick Start Guide
 
 This guide will walk you through the process of setting up and running your first Krypton ML server with a LangChain completion example.
 
@@ -71,6 +71,8 @@ krypton krypton_config.yaml
 ```
 
 The server should start, and you'll see output indicating that it's running and which endpoints are available.
+
+![Krypton ML Server Running](/img/docs/krypton_docs_1.png)
 
 ## Testing Your Deployment
 
