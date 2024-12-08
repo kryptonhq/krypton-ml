@@ -1,7 +1,10 @@
 ---
 title: Announcing HuggingFace Model Support
 description: Krypton ML now supports direct HuggingFace model inference
-authors: [krypton-team]
+authors:
+  - name: Varun Kruthiventi
+    title: Creator of Krypton ML
+    url: https://varunk.me
 tags: [huggingface, release, inference]
 ---
 
