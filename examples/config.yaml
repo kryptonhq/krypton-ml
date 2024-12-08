@@ -51,12 +51,3 @@ krypton:
       tags:
         - huggingface
         - translation
-    - name: custom-model-example
-      type: custom
-      description: Custom model example
-      module_path: ./examples
-      callable: custom.custom_model.CustomModelExample
-      endpoint: custom/model/example
-      tags:
-        - custom
-        - example
