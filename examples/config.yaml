@@ -27,10 +27,34 @@ krypton:
         - langchain
         - example
         - chat
+    - name: gpt2-model
+      type: huggingface
+      description: GPT-2 text generation model
+      endpoint: models/gpt2/generate
+      hf_model_name: "gpt2"
+      hf_task: "generation"
+      hf_generation_kwargs:
+        max_length: 100
+        temperature: 0.7
+        top_p: 0.9
+      tags:
+        - huggingface
+        - text-generation
+    - name: t5-translator
+      type: huggingface
+      description: T5 translation model
+      endpoint: models/t5/translate
+      hf_model_name: "t5-small"
+      hf_task: "seq2seq"
+      hf_generation_kwargs:
+        max_length: 50
+      tags:
+        - huggingface
+        - translation
     - name: custom-model-example
       type: custom
       description: Custom model example
-      module_path: .
+      module_path: ./examples
       callable: custom.custom_model.CustomModelExample
       endpoint: custom/model/example
       tags:
