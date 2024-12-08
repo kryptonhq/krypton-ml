@@ -25,6 +25,10 @@ transformers = {extras = ["torch"], version = "^4.47.0"}
 ruff = "^0.6.9"
 pre-commit = "^4.0.0"
 
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.4"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
