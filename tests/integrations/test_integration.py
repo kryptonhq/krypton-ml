@@ -115,6 +115,56 @@ class TestHuggingFaceIntegration:
         assert data["response"]["model_info"]["model_name"] == "t5-small"
         assert data["response"]["model_info"]["task"] == "seq2seq"
 
+    def test_phi2_generation(self):
+        """Test Phi-2 text generation endpoint"""
+        url = f"{BASE_URL}/models/phi2/generate"
+
+        # Test different prompts
+        test_cases = [
+            {
+                "text": "Write a short limerick about a programmer:",
+                "generation_params": {"max_length": 100, "temperature": 0.7}
+            },
+            {
+                "text": "Explain what is recursion in programming:",
+                "generation_params": {"max_length": 150, "temperature": 0.8}
+            },
+            {
+                "text": "Explain what is recursion in programming:",
+                "generation_params": {"max_length": 150, "temperature": 1.0}
+            },
+            {
+                "text": "Create a short story about AI in three sentences:",
+                "generation_params": {"max_length": 200, "do_sample": True, "top_p": 0.9, "temperature": 0.7}
+            }
+        ]
+
+        for case in test_cases:
+            response = requests.post(url, json=case, timeout=180)
+
+            assert response.status_code == 200
+            data = response.json()
+
+            # Validate response structure
+            assert "response" in data
+            assert "generated_text" in data["response"]
+            assert "model_info" in data["response"]
+
+            # Check model info
+            assert data["response"]["model_info"]["model_name"] == "microsoft/phi-2"
+            assert data["response"]["model_info"]["task"] == "generation"
+
+            # Validate generation
+            generated_text = data["response"]["generated_text"]
+            assert len(generated_text) > len(case["text"])
+            assert case["text"] in generated_text  # Should include the prompt
+
+            # Test different temperature settings effect
+            if case["generation_params"].get("temperature", 1.0) == 0:
+                # For temperature=0, running the same prompt twice should give identical results
+                response2 = requests.post(url, json=case, timeout=TIMEOUT)
+                assert response2.json()["response"]["generated_text"] == generated_text
+
 
 def test_invalid_endpoint():
     """Test behavior with invalid endpoint"""
