@@ -10,12 +10,19 @@ class ModelOptions(BaseModel):
 class Model(BaseModel):
     name: str
     type: str
-    module_path: str
-    callable: str
+    module_path: Optional[str] = None
+    callable: Optional[str] = None
     endpoint: str
     options: Optional[ModelOptions] = None
-    tags: List[str] = []
-    description: str = ""
+    tags: Optional[List[str]] = []
+    description: Optional[str] = ""
+
+    # HF model specific fields
+    hf_model_name: Optional[str] = None
+    hf_task: Optional[str] = "generation"
+    hf_model_kwargs: Optional[dict] = {}
+    hf_generation_kwargs: Optional[dict] = {}
+    hf_device: Optional[str] = "cpu"
 
 
 class ServerConfig(BaseModel):
