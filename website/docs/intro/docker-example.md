@@ -44,10 +44,10 @@ The completion example generates a paragraph about a given topic. Test it using 
 
 ```bash
 curl -X 'POST' \
-  'http://0.0.0.0:5000/langchain/llama3.2/completion' \
+  'http://0.0.0.0:5000/models/langchain/llama3.2/completion' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '{"topic": "Iron man"}'
+  -d '{"topic": "Tony stark"}'
 ```
 
 Expected Response:
@@ -95,7 +95,7 @@ services:
     networks:
       - krypton-network
 
-  krypton-example:
+    krypton-example:
     build:
       context: .
       dockerfile: Dockerfile
@@ -103,6 +103,8 @@ services:
       - "5000:5000"
     environment:
       - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./hf_cache:/root/.cache/huggingface
     depends_on:
       - ollama
     networks:
