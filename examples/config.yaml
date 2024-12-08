@@ -12,7 +12,7 @@ krypton:
       description: llama3.2 completion example using langchain
       module_path: .
       callable: langchain_example.completion.chain
-      endpoint: langchain/llama3.2/completion
+      endpoint: models/langchain/llama3.2/completion
       tags:
         - langchain
         - example
@@ -22,11 +22,20 @@ krypton:
       description: llama3.2 chat example using langchain
       module_path: .
       callable: langchain_example.chat.chain
-      endpoint: langchain/llama3.2/chat
+      endpoint: models/langchain/llama3.2/chat
       tags:
         - langchain
         - example
         - chat
+    - name: custom-model-example
+      type: custom
+      description: Custom model example
+      module_path: .
+      callable: custom.custom_model.CustomModelExample
+      endpoint: models/custom/example
+      tags:
+        - custom
+        - example
     - name: gpt2-model
       type: huggingface
       description: GPT-2 text generation model
