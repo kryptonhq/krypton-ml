@@ -1,38 +1,49 @@
 from typing import Dict, Any, List
 
-from krypton_ml.core.loader.module import load_module
 from krypton_ml.core.models.cli_config import Model
-from krypton_ml.core.models.registry import RegisteredModel, ModelInfoResponse
+from krypton_ml.core.models.registry import (
+    RegisteredModel,
+    ModelInfoResponse,
+    LangChainModelLoader,
+    CustomModelLoader,
+    HuggingFaceModelLoader,
+)
 
 
 class ModelRegistry:
     def __init__(self):
         self.model_registry: Dict[str, RegisteredModel] = {}
+        self._model_loaders = {
+            "langchain": LangChainModelLoader(),
+            "custom": CustomModelLoader(),
+            "huggingface": HuggingFaceModelLoader(),
+        }
 
-    def load_model(self, model: Model, model_key: str):
+    def load_model(self, model: Model, model_key: str) -> None:
         """
         Load a model into the model registry
-        :param model: Model object from the CLI config
-        :param model_key: Key to store the model in the registry
-        :return: None
-        """
-        model_callable = load_module(model.module_path, model.callable)
-        if model.type == "langchain":
-            model_artifact = model_callable
-        elif model.type == "custom":
-            # Initialize the model so that the model is ready to be invoked
-            model_artifact = model_callable()
-        else:
-            raise ValueError(f"Unsupported model type: {model.type}")
 
-        self.model_registry[model_key] = RegisteredModel(
-            model_artifact=model_artifact,
-            model_type=model.type,
-            name=model.name,
-            description=model.description,
-            tags=model.tags,
-            endpoint=model_key,
-        )
+        Args:
+            model: Model object from the CLI config
+            model_key: Key to store the model in the registry
+
+        Raises:
+            ValueError: If model type is not supported
+        """
+        try:
+            loader = self._model_loaders[model.type]
+            model_artifact = loader.load(model)
+
+            self.model_registry[model_key] = RegisteredModel(
+                model_artifact=model_artifact,
+                model_type=model.type,
+                name=model.name,
+                description=model.description,
+                tags=model.tags,
+                endpoint=model_key,
+            )
+        except KeyError:
+            raise ValueError(f"Unsupported model type: {model.type}")
 
     def invoke_model(self, model_key: str, input: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -51,6 +62,8 @@ class ModelRegistry:
         if model_type == "langchain":
             return model.invoke(input)
         elif model_type == "custom":
+            return model.predict(input)
+        elif model_type == "huggingface":
             return model.predict(input)
         else:
             raise ValueError(f"Unsupported model type: {model_type}")
