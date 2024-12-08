@@ -60,3 +60,18 @@ krypton:
       tags:
         - huggingface
         - translation
+    - name: phi2-generate
+      type: huggingface
+      description: Microsoft's Phi-2 small language model
+      endpoint: models/phi2/generate
+      hf_model_name: "microsoft/phi-2"
+      hf_task: "generation"
+      hf_generation_kwargs:
+        max_length: 200
+        temperature: 0
+        top_p: 0.9
+        do_sample: true
+      tags:
+        - huggingface
+        - generation
+        - phi2
