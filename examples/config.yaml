@@ -12,7 +12,7 @@ krypton:
       description: llama3.2 completion example using langchain
       module_path: .
       callable: langchain_example.completion.chain
-      endpoint: langchain/llama3.2/completion
+      endpoint: models/langchain/llama3.2/completion
       tags:
         - langchain
         - example
@@ -22,7 +22,7 @@ krypton:
       description: llama3.2 chat example using langchain
       module_path: .
       callable: langchain_example.chat.chain
-      endpoint: langchain/llama3.2/chat
+      endpoint: models/langchain/llama3.2/chat
       tags:
         - langchain
         - example
@@ -32,7 +32,46 @@ krypton:
       description: Custom model example
       module_path: .
       callable: custom.custom_model.CustomModelExample
-      endpoint: custom/model/example
+      endpoint: models/custom/example
       tags:
         - custom
         - example
+    - name: gpt2-model
+      type: huggingface
+      description: GPT-2 text generation model
+      endpoint: models/gpt2/generate
+      hf_model_name: "gpt2"
+      hf_task: "generation"
+      hf_generation_kwargs:
+        max_length: 100
+        temperature: 0.7
+        top_p: 0.9
+      tags:
+        - huggingface
+        - text-generation
+    - name: t5-translator
+      type: huggingface
+      description: T5 translation model
+      endpoint: models/t5/translate
+      hf_model_name: "t5-small"
+      hf_task: "seq2seq"
+      hf_generation_kwargs:
+        max_length: 50
+      tags:
+        - huggingface
+        - translation
+    - name: phi2-generate
+      type: huggingface
+      description: Microsoft's Phi-2 small language model
+      endpoint: models/phi2/generate
+      hf_model_name: "microsoft/phi-2"
+      hf_task: "generation"
+      hf_generation_kwargs:
+        max_length: 200
+        temperature: 0
+        top_p: 0.9
+        do_sample: true
+      tags:
+        - huggingface
+        - generation
+        - phi2

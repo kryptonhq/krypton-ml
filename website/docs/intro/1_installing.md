@@ -4,6 +4,8 @@ This guide will walk you through the process of setting up and running your firs
 
 ## 1. Installing krypton-ml
 
+[![PyPI version](https://badge.fury.io/py/krypton-ml.svg?icon=si%3Apython)](https://badge.fury.io/py/krypton-ml)
+
 First, you need to install the krypton-ml package. You can do this using pip:
 
 ```bash
@@ -50,7 +52,7 @@ krypton:
       description: llama3.2 completion example using langchain
       module_path: ./examples
       callable: langchain_example.completion.chain
-      endpoint: langchain/llama3.2/completion
+      endpoint: models/langchain/llama3.2/completion
       tags:
         - langchain
         - example
@@ -60,7 +62,7 @@ krypton:
 This configuration tells Krypton ML to:
 - Run the server on all available network interfaces (0.0.0.0) on port 5000
 - Load the `chain` function from `completion.py`
-- Create an endpoint `/langchain/llama3.2/completion` for this model
+- Create an endpoint `models/langchain/llama3.2/completion` for this model
 
 ## 4. Running the Server with the Config File
 
@@ -79,7 +81,7 @@ The server should start, and you'll see output indicating that it's running and 
 You can test your deployment using curl or any API client. Here's an example using curl:
 
 ```bash
-curl -X POST http://localhost:5000/langchain/llama3.2/completion \
+curl -X POST http://localhost:5000/models/langchain/llama3.2/completion \
      -H "Content-Type: application/json" \
      -d '{"topic": "artificial intelligence"}'
 ```
