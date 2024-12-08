@@ -32,16 +32,21 @@ krypton:
 
 ### Model Configuration
 
-| Parameter | Type | Description                                             |
-|-----------|------|---------------------------------------------------------|
-| name | String | Name of the model                                       |
-| type | String | Type of the model (e.g., "langchain", "custom")                 |
-| module_path | String | Python path to the module containing the model          |
-| callable | String | Name of the function or class to call within the module |
-| endpoint | String | API endpoint for the model                              |
-| options | ModelOptions | (Optional) Additional options for the model             |
-| tags | List[String] | (Optional) Tags associated with the model               |
-| description | String | (Optional) Description of the model                     |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name | String | Yes | Name of the model |
+| type | String | Yes | Type of the model (e.g., "langchain", "custom") |
+| module_path | String | No | Python path to the module containing the model |
+| callable | String | No | Name of the function or class to call within the module |
+| endpoint | String | Yes | API endpoint for the model |
+| options | ModelOptions | No | Additional options for the model |
+| tags | List[String] | No | Tags associated with the model (defaults to empty list) |
+| description | String | No | Description of the model (defaults to empty string) |
+| hf_model_name | String | No | Hugging Face model name (for HuggingFace models only) |
+| hf_task | String | No | Hugging Face task type (defaults to "generation") |
+| hf_model_kwargs | Object | No | Additional keyword arguments for HuggingFace model initialization |
+| hf_generation_kwargs | Object | No | Additional keyword arguments for HuggingFace model generation |
+| hf_device | String | No | Device to run the HuggingFace model on (defaults to "cpu") |
 
 ### ModelOptions
 
@@ -68,6 +73,7 @@ Here's an example of a complete `config.yaml` file:
 ```yaml
 krypton:
   models:
+    # LangChain model example
     - name: text-completion
       type: langchain
       module_path: examples.text_completion
@@ -80,14 +86,22 @@ krypton:
         - completion
       description: "A text completion model using LangChain"
     
-    - name: chat-model
-      type: langchain
-      module_path: examples.chat_model
-      callable: create_chat_chain
-      endpoint: /chat
+    # HuggingFace model example
+    - name: text-generation
+      type: huggingface
+      endpoint: /generate
+      hf_model_name: gpt2
+      hf_task: text-generation
+      hf_device: cuda
+      hf_model_kwargs:
+        torch_dtype: float16
+      hf_generation_kwargs:
+        max_length: 100
+        do_sample: true
       tags:
         - nlp
-        - chat
+        - generation
+      description: "GPT-2 text generation model"
 
   server:
     host: "0.0.0.0"
@@ -103,6 +117,9 @@ krypton:
     debug: true
 ```
 
-This configuration sets up two models (a text completion model and a chat model) and configures the server with custom settings.
+The example above demonstrates:
+1. A LangChain-based model configuration
+2. A HuggingFace model configuration with specific model parameters
+3. Server configuration with CORS settings
 
-Remember to adjust the `module_path` and `callable` parameters to match your actual module structure and function names.
+Remember to adjust the paths and parameters according to your specific setup and requirements.
