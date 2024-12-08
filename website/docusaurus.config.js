@@ -60,6 +60,10 @@ const config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        gtag: {
+          trackingID: 'GTM-W23S2CDB',
+          anonymizeIP: true,
+        },
       }),
     ],
   ],
