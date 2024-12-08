@@ -50,7 +50,6 @@ krypton:
       endpoint: /generate
       hf_model_name: gpt2
       hf_task: text-generation
-      hf_device: cuda  # Use GPU acceleration
       hf_model_kwargs:
         torch_dtype: float16
       hf_generation_kwargs:
