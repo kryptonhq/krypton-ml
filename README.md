@@ -1,5 +1,7 @@
 # Krypton ML
 
+[![PyPI version](https://badge.fury.io/py/krypton-ml.svg?icon=si%3Apython)](https://badge.fury.io/py/krypton-ml)
+
 Krypton ML is a simple ML model serving framework with an emphasis on a config-driven approach. It's designed to make deploying machine learning models as API endpoints quick and easy.
 
 **Note:** This project is currently in the experimental stage and only supports LangChain invocation.

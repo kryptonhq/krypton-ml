@@ -4,6 +4,8 @@ This guide will walk you through the process of setting up and running your firs
 
 ## 1. Installing krypton-ml
 
+[![PyPI version](https://badge.fury.io/py/krypton-ml.svg?icon=si%3Apython)](https://badge.fury.io/py/krypton-ml)
+
 First, you need to install the krypton-ml package. You can do this using pip:
 
 ```bash
